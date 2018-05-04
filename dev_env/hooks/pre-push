@@ -1,0 +1,17 @@
+#!/bin/sh
+
+CONTINUE=yes
+
+exec < /dev/tty
+if [ $(git rev-parse --abbrev-ref HEAD) = "master" ]
+then
+    CONTINUE=no
+    echo 'Are you sure you want to push to master? Please type "yes" in all lower case. [no]'
+    read CONTINUE
+fi
+
+if [ "$CONTINUE" != "yes" ]
+then
+    echo 'Aborting; please type "yes" if you want to continue.'
+    exit 0;
+fi
