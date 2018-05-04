@@ -1,22 +1,23 @@
 #!/bin/bash
 
-FN=$(basename $0)
+SRC_SCRIPT=$(basename $0)
+SRC_DIR=$(dirname $0)
 CONTEXT=$1
 SCRIPT=$2
 
 function print_scripts {
-	ls ../available/bin
+	ls ${SRC_DIR}/../available/bin
 }
 
 function print_hooks {
-	ls ../available/hooks
+	ls ${SRC_DIR}/../available/hooks
 }
 
 function print_usage {
-	cat ../docs/${FN}.txt
+	cat ${SRC_DIR}/../docs/${SRC_SCRIPT}.txt
 }
 
-if [[ $CONTEXT != "hook" || $CONTEXT != "script" || $CONTEXT == "HELP" ]]
+if [[ $CONTEXT != "hook" && $CONTEXT != "script" && $CONTEXT == "HELP" ]]
 then
 	print_usage
 
@@ -33,11 +34,11 @@ then
 	CONTEXT="bin"
 fi
 
-if [[ ! -f ../available/$CONTEXT/$SCRIPT ]]
+if [[ ${SCRIPT} == "" || ! -f ${SRC_DIR}/../available/${CONTEXT}/${SCRIPT} ]]
+then
 	echo "These are the files available to you:"
-	ls ../available/$CONTEXT
+	ls ${SRC_DIR}/../available/${CONTEXT}
 	exit 0
 fi
 
-
-ln -s ../available/$CONTEXT/$SCRIPT ../$CONTEXT/$SCRIPT
+ln -s ${SRC_DIR}/../available/${CONTEXT}/${SCRIPT} ${SRC_DIR}/../${CONTEXT}/${SCRIPT}
