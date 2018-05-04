@@ -1,0 +1,8 @@
+Usage: `git use <context> <script-name>`
+
+<context>: "script" or "hook," which are you trying to enable?
+<script-name>: Which script do you want to enable? (see below)
+
+This command makes the corresponding script available.
+
+Scripts available for use:

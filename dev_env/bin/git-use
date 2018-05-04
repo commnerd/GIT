@@ -1,0 +1,43 @@
+#!/bin/bash
+
+FN=$(basename $0)
+CONTEXT=$1
+SCRIPT=$2
+
+function print_scripts {
+	ls ../available/bin
+}
+
+function print_hooks {
+	ls ../available/hooks
+}
+
+function print_usage {
+	cat ../docs/${FN}.txt
+}
+
+if [[ $CONTEXT != "hook" || $CONTEXT != "script" || $CONTEXT == "HELP" ]]
+then
+	print_usage
+
+	echo "Hooks:"
+	print_hooks
+	echo ""
+	echo "Scripts:"
+	print_scripts
+	exit 0
+fi
+
+if [[ $CONTEXT == "script" ]]
+then
+	CONTEXT="bin"
+fi
+
+if [[ ! -f ../available/$CONTEXT/$SCRIPT ]]
+	echo "These are the files available to you:"
+	ls ../available/$CONTEXT
+	exit 0
+fi
+
+
+ln -s ../available/$CONTEXT/$SCRIPT ../$CONTEXT/$SCRIPT
