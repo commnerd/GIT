@@ -1,0 +1,52 @@
+#!/bin/bash
+
+SRC_SCRIPT=$(basename $0)
+SRC_DIR=$(dirname $0)
+CONTEXT=$1
+CONTEXT_DIR=$CONTEXT
+SCRIPT=$2
+
+
+if [[ $CONTEXT == "script" ]]
+then
+	CONTEXT_DIR="bin"
+fi
+
+function print_scripts {
+	ls ${SRC_DIR}/../bin
+}
+
+function print_hooks {
+	ls ${SRC_DIR}/../hooks
+}
+
+function print_usage {
+	cat ${SRC_DIR}/../docs/${SRC_SCRIPT}.txt
+}
+
+if [[ $CONTEXT != "hook" && $CONTEXT != "script" || $CONTEXT == "help" ]]
+then
+	print_usage
+
+	echo "Hooks:"
+	print_hooks
+	echo ""
+	echo "Scripts:"
+	print_scripts
+	exit 0
+fi
+
+if [[ ${SCRIPT} == "" || ! -f ${SRC_DIR}/../${CONTEXT_DIR}/${SCRIPT} ]]
+then
+	echo "These are the files are currently enabled:"
+	ls ${SRC_DIR}/../${CONTEXT_DIR} | grep -v git-use
+	exit 0
+fi
+
+if [[ ${SCRIPT} == 'git-use' ]]
+then
+	echo "This script is not intended for removal"
+	exit 1
+fi
+
+rm -f ${SRC_DIR}/../${CONTEXT_DIR}/${SCRIPT}

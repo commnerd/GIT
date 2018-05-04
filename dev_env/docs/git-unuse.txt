@@ -1,0 +1,8 @@
+Usage: `git unuse <context> <script-name>`
+
+<context>: "script" or "hook," which are you trying to disable?
+<script-name>: Which script do you want to disable? (see below)
+
+This command can disable the following scripts.
+
+Active scripts:
