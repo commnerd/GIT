@@ -1,0 +1,5 @@
+/dev_env/bin/*
+/dev_env/hooks/*
+
+/srv_env/bin/*
+/srv_env/hooks/*
