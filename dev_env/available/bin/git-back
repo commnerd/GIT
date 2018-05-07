@@ -1,3 +1,9 @@
 #!/bin/bash
 
+if [ $(git rev-parse --abbrev-ref HEAD) != HEAD ]
+then
+	TOP=$(git rev-parse --show-toplevel)
+	git rev-parse --abbrev-ref HEAD > $TOP/.git/CURRENT_BRANCH_CONTEXT 
+fi
+
 git checkout $(git log | grep ^commit | head -n 2 | tail -n 1 | cut -d' ' -f2)

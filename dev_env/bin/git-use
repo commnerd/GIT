@@ -36,11 +36,11 @@ then
 	exit 0
 fi
 
-if [[ ${SRC_SCRIPT} == "" || ! -f ${SRC_DIR}/../available/${CONTEXT_DIR}/${SRC_SCRIPT} ]]
+if [[ ${SCRIPT} == "" || ! -f ${SRC_DIR}/../available/${CONTEXT_DIR}/${SCRIPT} ]]
 then
 	echo "These are the files available to you:"
 	ls ${SRC_DIR}/../available/${CONTEXT_DIR}
 	exit 0
 fi
 
-ln -s ${SRC_DIR}/../available/${CONTEXT_DIR}/${SCRIPT} ${SRC_DIR}/../${CONTEXT_DIR}/${SRC_SCRIPT}
+ln -s ${SRC_DIR}/../available/${CONTEXT_DIR}/${SCRIPT} ${SRC_DIR}/../${CONTEXT_DIR}/${SCRIPT}

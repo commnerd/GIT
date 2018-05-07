@@ -1,0 +1,14 @@
+#!/bin/bash
+
+TOP=$(git rev-parse --show-toplevel)
+CURRENT_BRANCH=$(cat $TOP/.git/CURRENT_BRANCH_CONTEXT)
+CURRENT_BRANCH_COMMIT=$(git log $CURRENT_BRANCH | grep ^commit | head -n 1 | cut -d' ' -f2)
+CURRENT_COMMIT=$(git rev-parse HEAD)
+CURRENT_COMMIT_LINE=$(git log dev | grep ^commit | grep -n $(git rev-parse HEAD) | cut -d":" -f 1)
+TARGET_COMMIT=$(git log $CURRENT_BRANCH | grep ^commit | head -n $CURRENT_COMMIT_LINE | tail -n 2 | head -n 1 | cut -d' ' -f2)
+if [ $CURRENT_BRANCH_COMMIT == $TARGET_COMMIT ]
+then
+	TARGET_COMMIT=$CURRENT_BRANCH
+fi
+
+git checkout $TARGET_COMMIT
