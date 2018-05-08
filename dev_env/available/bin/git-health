@@ -1,0 +1,3 @@
+#!/bin/bash
+
+wc -l $(find . -not -path '*/\.*' -not -path '*/LICENSE' -not -path '*/README.md' -type f) | grep -v ' total$' | sort -rnk1

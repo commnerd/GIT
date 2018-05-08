@@ -20,10 +20,19 @@ git unuse (script|hook) <script-name>
 ```
 -- git-back: Move back into the current history
 ```bash
-git cleanup 
+git back 
+```
+-- git-forward: Move forward into the current history (must have used "git back" first)
+```bash
+git forward 
+```
+-- git-health: Simple ordered descending line count to identify "thick" files
+```bash
+git health
 ```
 -- git-cleanup: Remove the given branch from both your local repo and origin
 ```bash
+git cleanup 
 ```
 
 - hooks
