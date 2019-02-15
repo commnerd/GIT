@@ -35,6 +35,11 @@ git health
 git cleanup 
 ```
 
+-- git-clear-local-branches: Remove all local branches, but the checked-out one
+```bash
+git clear-local-branches
+```
+
 - hooks
 -- pre-commit: Don't commit to master! (without approval)
 ```bash
